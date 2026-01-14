@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings | Weather Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    body.dark {
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+
+    .settings-container {
+      background: white;
+      width: 360px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    body.dark .settings-container {
+      background: #1e293b;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .setting {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    body.dark select,
+    body.dark input {
+      background: #334155;
+      color: white;
+      border: none;
+    }
+
+    .toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .save-btn {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .back-btn {
+      background: #64748b;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+     <<nav>
+  <a href="index.html">Home</a> |
+  <a href="forecast.html">Forecast</a> 
+   <a href="search.html">search</a>|
+  <a href="details.html">details</a>
+  <a href="setting.html">setting</a>
+  <a href="Help.html">Help</a>
+</nav>
+
+  <div class="settings-container">
+    <h1>⚙ Settings</h1>
+
+    <div class="setting">
+      <label>Default City</label>
+      <input type="text" id="cityInput" placeholder="Enter city name">
+    </div>
+
+    <div class="setting">
+      <label>Temperature Unit</label>
+      <select id="unitSelect">
+        <option value="metric">Celsius (°C)</option>
+        <option value="imperial">Fahrenheit (°F)</option>
+      </select>
+    </div>
+
+    <div class="setting toggle">
+      <label>Dark Mode</label>
+      <input type="checkbox" id="darkToggle">
+    </div>
+
+    <div class="buttons">
+      <button class="save-btn" onclick="saveSettings()">Save</button>
+      <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+  </div>
+
+  
+  <script>
+   
+    const savedCity = localStorage.getItem("defaultCity");
+    const savedUnit = localStorage.getItem("unit");
+    const darkMode = localStorage.getItem("darkMode");
+
+    if (savedCity) document.getElementById("cityInput").value = savedCity;
+    if (savedUnit) document.getElementById("unitSelect").value = savedUnit;
+    if (darkMode === "true") {
+      document.getElementById("darkToggle").checked = true;
+      document.body.classList.add("dark");
+    }
+
+    

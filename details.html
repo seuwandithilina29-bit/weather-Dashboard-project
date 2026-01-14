@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== CSS ===== -->
+  <style>
+    body 
+     
+    
+    {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333333;
+    }
+
+    .details-container {
+      background: #a4af85;
+      width: 360px;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .city {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .temp {
+      text-align: center;
+      font-size: 52px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .desc {
+      text-align: center;
+      text-transform: capitalize;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .card {
+      background: #f3f4f6;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .card span {
+      display: block;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #667eea;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+     <nav>
+  <a href="index.html">Home</a> |
+  <a href="forecast.html">Forecast</a> 
+   <a href="search.html">search</a>|
+  <a href="details.html">details</a>
+  <a href="setting.html">details</a>
+  <a href="details.html">details</a>
+</nav>
+
+  <div class="details-container">
+    <h1>🌤 Weather Details</h1>
+
+    <div id="weather">
+      <div class="city" id="city"></div>
+      <div class="temp" id="temp"></div>
+      <div class="desc" id="desc"></div>
+
+      <div class="info">
+        <div class="card">Feels Like<span id="feels"></span></div>
+        <div class="card">Humidity<span id="humidity"></span></div>
+        <div class="card">Wind Speed<span id="wind"></span></div>
+        <div class="card">Pressure<span id="pressure"></span></div>
+      </div>
+    </div>
+
+    <div class="error" id="error"></div>
+
+    <button class="back-btn" onclick="goBack()">← Back to Search</button>
+  </div>
+
+  
+  <script>
+    const apiKey = "YOUR_API_KEY"; 
+
+   
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get("city") || "Colombo";
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data.cod !== 200) {
+          document.getElementById("error").innerText = "City not found";
+          return;
+        }
+
+        document.getElementById("city").innerText = data.name;
+        document.getElementById("temp").innerText = `${data.main.temp}°C`;
+        document.getElementById("desc").innerText = data.weather[0].description;
+        document.getElementById("feels").innerText = `${data.main.feels_like}°C`;
+        document.getElementById("humidity").innerText = `${data.main.humidity}%`;
+        document.getElementById("wind").innerText = `${data.wind.speed} km/h`;
+        document.getElementById("pressure").innerText = `${data.main.pressure} hPa`;
+      })
+      .catch(() => {
+        document.getElementById("error").innerText = "Error loading data";
+      });
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
