@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>7-Day Weather Forecast</title>
+
+  <!-- ===== CSS ===== -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #668ab3;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .forecast-container {
+      max-width: 600px;
+      margin: auto;
+      background: rgb(255, 255, 255);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .forecast-day {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #046161;
+    }
+
+    .forecast-day:last-child {
+      border-bottom: none;
+    }
+
+    .temp {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+    <nav>
+  <a href="index.html">Home</a> |
+  <a href="forecast.html">Forecast</a> |
+  <a href="about.html">About</a>
+</nav>
+
+
+  <div class="forecast-container">
+    <h1>7-Day Weather Forecast</h1>
+    <div id="forecast">Loading...</div>
+  </div>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    const apiKey = "YOUR_API_KEY"; // OpenWeatherMap API Key
+    const city = "Colombo";
+
+    // OpenWeather 7-day forecast requires lat & lon (One Call API)
+    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
+
+    fetch(geoUrl)
+      .then(res => res.json())
+      .then(geoData => {
+        const lat = geoData[0].lat;
+        const lon = geoData[0].lon;
+
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${apiKey}`;
+
+        return fetch(forecastUrl);
+      })
+      .then(res => res.json())
+      .then(data => {
+        const forecastDiv = document.getElementById("forecast");
+        forecastDiv.innerHTML = "";
+
+        data.daily.slice(0, 7).forEach(day => {
+          const date = new Date(day.dt * 1000).toDateString();
+
+          forecastDiv.innerHTML += `
+            <div class="forecast-day">
+              <span>${date}</span>
+              <span>${day.weather[0].main}</span>
+              <span class="temp">${day.temp.day}°C</span>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById("forecast").innerHTML =
+          "Error loading weather data";
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
