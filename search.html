@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== CSS ===== -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .weather-app {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 10px 15px;
+      border: none;
+      background: #4facfe;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .weather {
+      display: none;
+    }
+
+    .temp {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .city {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      text-transform: capitalize;
+      margin-bottom: 15px;
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+      <nav>
+  <a href="index.html">Home</a> |
+  <a href="forecast.html">Forecast</a> |
+  <a href="search.html">search</a>
+</nav>
+
+
+  <div class="weather-app">
+    <h1>🌤 Weather App</h1>
+
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Enter city name">
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="weather" id="weather">
+      <div class="city" id="city"></div>
+      <div class="temp" id="temp"></div>
+      <div class="description" id="description"></div>
+
+      <div class="details">
+        <div>Humidity: <span id="humidity"></span>%</div>
+        <div>Wind: <span id="wind"></span> km/h</div>
+      </div>
+    </div>
+
+    <div class="error" id="error"></div>
+  </div>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    const apiKey = "YOUR_API_KEY"; // 🔑 Put your OpenWeatherMap API key here
+
+    function getWeather() {
+      const city = document.getElementById("cityInput").value;
+      const errorDiv = document.getElementById("error");
+      const weatherDiv = document.getElementById("weather");
+
+      if (city === "") {
+        errorDiv.innerText = "Please enter a city name";
+        weatherDiv.style.display = "none";
+        return;
+      }
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod !== 200) {
+            errorDiv.innerText = "City not found";
+            weatherDiv.style.display = "none";
+            return;
+          }
+
+          errorDiv.innerText = "";
+          weatherDiv.style.display = "block";
+
+          document.getElementById("city").innerText = data.name;
+          document.getElementById("temp").innerText = `${data.main.temp}°C`;
+          document.getElementById("description").innerText = data.weather[0].description;
+          document.getElementById("humidity").innerText = data.main.humidity;
+          document.getElementById("wind").innerText = data.wind.speed;
+        })
+        .catch(() => {
+          errorDiv.innerText = "Error fetching data";
+          weatherDiv.style.display = "none";
+        });
+    }
+  </script>
+
+</body>
+</html>
