@@ -20,7 +20,7 @@ Individual Contributions
 
 M.M.Samadhi Dilshani Bandara Initial repository architecture and Git workflow setup.,Configured GitHub Actions for automated testing and deployment.Managed the main and develop branch merges.
 
-W.R.Madavi Neranjana Rajanayaka Designed the responsive User Interface (UI) using CSS Flexbox/Grid.
+W.R.Madavi Neranjana Rajanayaka Designed the responsive User Interface (UI) using CSS Flexbox/Grid.Implemented the five day forecast layout and weather icons.
 
 Clone the repository
 git clone https://github.com /seuwandithilina29-bit/weather -Dashboard
