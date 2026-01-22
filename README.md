@@ -4,11 +4,11 @@ Group Information
 
 Student 1: M.M.Samadhi Dilshani Bandara
 ID: ITBNM-2313-0007
-Role: Developer (DevOps)
+Role: Devops Engineer
 
 Student 2: W.R.Madavi Neranjana Rajanayaka
 ID: ITBNM-2313-0063
-Role: Frontend Developer
+Role: Fullstack Developer
 
 Project Description
 
@@ -19,11 +19,11 @@ Live URL: https://github.com/seuwandithilina29-bit/weather-Dashboard-project
 Individual Contributions
 
 M.M.Samadhi Dilshani Bandara 
-(Developer)
+(Devops Engineer)
 Initial repository architecture and Git workflow setup.,Configured GitHub Actions for automated testing and deployment.Managed the main and develop branch merges.
 
 W.R.Madavi Neranjana Rajanayaka 
-(Frontend Developer)
+(Fullstack Developer)
 Designed the responsive User Interface (UI) using CSS Flexbox/Grid.Implemented the five day forecast layout and weather icons.
 
 Clone the repository
