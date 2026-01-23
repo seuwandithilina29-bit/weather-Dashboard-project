@@ -20,14 +20,29 @@ Individual Contributions
 
 M.M.Samadhi Dilshani Bandara 
 (Devops Engineer)
-Initial repository architecture and Git workflow setup.,Configured GitHub Actions for automated testing and deployment.Managed the main and develop branch merges.
+.Initial repository architecture and Git workflow setup.
+.Configured GitHub Actions for automated testing and deployment.
+.Managed the main and develop  branch merges.
 
 W.R.Madavi Neranjana Rajanayaka 
 (Fullstack Developer)
-Designed the responsive User Interface (UI) using CSS Flexbox/Grid.Implemented the five day forecast layout and weather icons.
+.Designed the responsive User Interface (UI) using CSS Flexbox/Grid.
+.Implemented the five day forecast layout and weather icons.
+.specific commits contribution.
+
+Features
+.Real time data weather fetching.
+.search functionality by city name.
+.Displays temparature ,humadity, wind speed.
+
+Branch Stratergy
+.Main - production branch
+.Develop - Intergration branch
+.Feature - Feature development
 
 Clone the repository
-git clone https://github.com /seuwandithilina29-bit/weather -Dashboard
+git clone
+https://github.com /seuwandithilina29-bit/weather -Dashboard
 
 
 
