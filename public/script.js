@@ -7,19 +7,24 @@ async function getWeather() {
         return;
     }
 
+    const API_KEY = "YOUR_OPENWEATHER_API_KEY"; // 🔥 Put your key here
+
     try {
-        const response = await fetch(`/api/weather?city=${city}`);
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
+
         const data = await response.json();
 
-        if (data.error) {
-            result.innerHTML = data.error;
+        if (data.cod !== 200) {
+            result.innerHTML = data.message;
             return;
         }
 
         result.innerHTML = `
-            <h3>${data.city}</h3>
-            <p>Temperature: ${data.temp} °C</p>
-            <p>Description: ${data.description}</p>
+            <h3>${data.name}</h3>
+            <p>Temperature: ${data.main.temp} °C</p>
+            <p>Description: ${data.weather[0].description}</p>
         `;
     } catch (err) {
         result.innerHTML = "Error fetching data";
