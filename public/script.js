@@ -7,7 +7,7 @@ async function getWeather() {
         return;
     }
 
-    const API_KEY = "YOUR_OPENWEATHER_API_KEY"; // 🔥 Put your key here
+    const API_KEY = "e8cdb88cb69c6f32cdcd2d5b3507241b";
 
     try {
         const response = await fetch(
