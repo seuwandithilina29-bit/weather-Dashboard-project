@@ -14,7 +14,7 @@ Project Description
 
 ![image alt](https://github.com/seuwandithilina29-bit/weather-Dashboard-project/blob/55140e355b539fe7432c87d0d3b3dd24b3a5125f/qwe1.png)
 
-![image alt](https://github.com/seuwandithilina29-bit/weather-Dashboard-project/blob/55140e355b539fe7432c87d0d3b3dd24b3a5125f/qwe1.png)
+![image alt](https://github.com/seuwandithilina29-bit/weather-Dashboard-project/blob/172ffb90ae3e52c11249f7daec88f147a212e1c2/qwe2.png)
 
 The Weather Dashboard is a web application that fetches live data from a Weather API (like OpenWeatherMap). Users can input a city name to receive instant updates on temperature, humidity, wind speed, and UV index. The project demonstrates a clean Ul and a robust deployment pipeline.
 
