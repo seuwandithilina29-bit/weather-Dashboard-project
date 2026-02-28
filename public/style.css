@@ -87,3 +87,26 @@ button:hover {
     font-size: 18px;
     color: #555;
 }
+
+/* Weather icon */
+.weather-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: float 2s infinite ease-in-out;
+}
+
+/* Float animation */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* Result styling */
+#result.show-weather {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: all 0.5s ease;
+}
