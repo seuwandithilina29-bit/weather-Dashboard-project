@@ -18,9 +18,9 @@ Project Description
 
 The Weather Dashboard is a web application that fetches live data from a Weather API (like OpenWeatherMap). Users can input a city name to receive instant updates on temperature, humidity, wind speed, and UV index. The project demonstrates a clean Ul and a robust deployment pipeline.
 
-Repository URL: https://github.com/seuwandithilina29-bit/weather-Dashboard-project
+Repository URL: https://github.com/seuwandithilina29-bit/weather-Dashboard-project.git
 
-Deployment URL : 
+Deployment URL : https://weather-dashboard-project-ebon.vercel.app/
 
 Individual Contributions
 
