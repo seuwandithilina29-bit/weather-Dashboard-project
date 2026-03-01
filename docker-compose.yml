@@ -1,0 +1,58 @@
+version: '3.8'
+ 
+services:
+  # Flask application service
+  app:
+    build: .
+    container_name: weather_app
+    restart: unless-stopped
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - FLASK_ENV=${FLASK_ENV:-production}
+    volumes:
+      - weather_cache:/app/data
+    networks:
+      - weather_network
+    # No published ports — only accessible through Nginx
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+ 
+  # Nginx reverse proxy service
+  web:
+    image: nginx:alpine
+    container_name: weather_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - weather_network
+    depends_on:
+      app:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
+ 
+# Named volume for API response cache
+volumes:
+  weather_cache:
+ 
+# Custom network for service isolation
+networks:
+  weather_network:
+    driver: bridge

@@ -1,0 +1,36 @@
+# Python virtual environment — never include in image
+venv/
+.venv/
+env/
+ 
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+ 
+# Environment / secrets — NEVER include in Docker image
+.env
+.env.*
+!.env.example
+ 
+# Version control metadata
+.git/
+.gitignore
+ 
+# Test files
+tests/
+*.test.py
+ 
+# Documentation
+*.md
+docs/
+ 
+# OS files
+.DS_Store
+Thumbs.db
+ 
+# Logs
+*.log
+logs/
